@@ -6,9 +6,7 @@ let infoCards = document.querySelector("#infoCards");
 let userCardBox = '<div id="profilePicture"><img class="circleCrop" src="default_photo.jpeg" width="100" height="100"></div><br>' + 
                   '<b>Name:</b> <p id="name">LOADING</p>' + 
                   '<b>UGA Email:</b> <p id="email">LOADING@uga.edu</p>' +
-                  '<b>Total Attendance Hours:</b> <p id="totalHours">Loading...</p>' + 
-                  '<b>Membership Status:</b>* <p id="membershipStatus">Loading...</p>' + 
-'<hr>* Note: Membership status may take up to 1 week to update. If your membership status is not updated after 1 week of payment, please contact us at <a href="mailto:ugaacm@uga.edu">ugaacm@uga.edu</a>. Your membership status shown is for ACM only. ACM-W Girls.Code() is our sister organization and only uses our portal for EL hour tracking.'
+                  '<b>Total Attendance Hours:</b> <p id="totalHours">Loading...</p>'
 let signInButton = document.querySelector(".signInButton");
 
 // fetching the login credential data, validating the uga.edu, and then sending it to database to take care of the rest
@@ -22,7 +20,6 @@ function login(response) {
     let profilePicture = document.querySelector("#profilePicture");
     let name = document.querySelector("#name");
     let email = document.querySelector("#email");
-    let membershipStatus = document.querySelector("#membershipStatus");
     name.innerHTML = responsePayLoad.name;
     email.innerHTML = responsePayLoad.email;
     attendance = generateAttendance(responsePayLoad.email, responsePayLoad.given_name, responsePayLoad.family_name);
@@ -30,26 +27,10 @@ function login(response) {
   } // if
 } // login
 
-// check for if member paid dues
-function checkPayingMember(email) {
-  return false;
-} // checkPayingMember
-
-function checkMemberStatus(email) {
-  let memPaid = 0;
-  let memForm = 0;
-  return httpGetSync("https://script.google.com/macros/s/AKfycbyYNnp9nrUGVJJW-jN1wEsmflkd2jtsIR-qjEK-a7-8AjmMYQOSceTLCBWkNL5ihQqnrw/exec?myid=" + email, function(data){memPaid = data.memPaid; memForm = data.memForm});
-}
-
-// check if membership form is filled out
-function checkMembershipForm(email) {
-  return false;
-} // checkMembershipForm
-
 function generateAttendance(email, fName, lName) {
-  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>Attandance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugaacm@uga.edu'>ugaacm@uga.edu</a>.</div></div>" +
+  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>Attandance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugagirls.code@gmail.com'>ugagirls.code@gmail.com</a>.</div></div>" +
 "<div id='elInfo' class = 'infoCard'><b>About UGAHacks Experiential Learning</b> [<a href='javascript:showELInfo();'>show</a>]</div>"
-  httpGetAsync("https://script.google.com/macros/s/AKfycbyYNnp9nrUGVJJW-jN1wEsmflkd2jtsIR-qjEK-a7-8AjmMYQOSceTLCBWkNL5ihQqnrw/exec?myid=" + email.split("@")[0], function(data){
+  httpGetAsync("https://script.google.com/macros/s/AKfycbxD_-FnsTiWAEB1xrMVkl6gBWt0B8jOGoMzezLxNZagkoWbu_UoP4jup7UKMKGxGGoBtw/exec?myid=" + email.split("@")[0], function(data){
   dataParsed = JSON.parse(data);
     console.log(dataParsed);
     let attendanceTable = document.querySelector("#attendanceTable");
@@ -57,20 +38,6 @@ function generateAttendance(email, fName, lName) {
     fillAttendance(attendanceTable, dataParsed);
     //return dataParsed
 
-    //const memberInfo = checkMemberInfo(email);        
-
-var payingMember = 0;
-    var membershipForm = 1;
-    if (0) {
-      //membershipStatus.innerHTML = "Paying Member";
-      //payingMember = 1;
-    } else {
-      //membershipStatus.innerHTML = "General Attendee (dues not paid)"
-    } //if
-    if (0) {
-      //notificationBool = 1;
-      //membershipForm = 0;
-    } // if
       var hourCounter = 0;
     for (i = 0; i < dataParsed.length; i++) {
       hourCounter = hourCounter + dataParsed[i].hours;
@@ -83,7 +50,6 @@ var payingMember = 0;
       alertDiv.innerHTML = '<div id="notifications" class="infoCard"></div>'
       let notifications = document.querySelector("#notifications");
       notifications.innerHTML = "<b>Notifications:</b>"
-      // addMembershipNotifications(notifications, payingMember, membershipForm);
       addReflectionNotifications(notifications, dataParsed);
     } // if
   });
@@ -127,14 +93,6 @@ function hideELInfo() {
   document.querySelector("#elInfo").innerHTML = "<b>About UGAHacks Experiential Learning</b> [<a href='javascript:showELInfo();'>show</a>]";
 } // hideELInfo
 
-function addMembershipNotifications(notifications, paid, formBool) {
-  if (!paid) {
-    notifications.innerHTML += "<p><u>Membership Dues</u> - It looks like you have not paid for your membership dues! If you are interested in becoming a paid member, <a href='https://ugapac.evenue.net/cgi-bin/ncommerce3/SEGetEventInfo?ticketCode=GS%3AUGAARTS%3ATATE2324%3AMEM.ACM%3A&linkID=ta-ugaarts&shopperContext=&pc=&caller=&appCode=&groupCode=PAY&cgc=&dataAccId=157&locale=en_US&siteId=ev_ta-ugaarts'>click here</a> to pay for your membership dues! Please keep in mind that your membership status displayed on this portal is for ACM only. ACM-W Girls.Code() is our sister organization and only uses our portal for EL hour tracking.</p>"
-  } else if (!formBool) {
-    notifications.innerHTML += "<p><u>Membership Form</u> - It looks like you have not filled out your membership form! To ensure you recieve all of your membership benefits, <a href='https://forms.gle/k8o7NLeUJuiehQGf8'>click here</a> to fill out the membership form!</p>"
-  } // if
-} // addMembershipNotifications
-
 function addReflectionNotifications(notification, attendance) {
   for (i = 0; i < attendance.length; i++) {
     if (attendance[i].elAvailable && attendance[i].elReflection.length == 0) {
@@ -157,6 +115,7 @@ xmlHttp.onreadystatechange = function() {
         callback(xmlHttp.responseText);
 }
 xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
 xmlHttp.send(null);
 } // httpGetAsync
 
@@ -168,5 +127,6 @@ xmlHttp.onreadystatechange = function() {
         callback(xmlHttp.responseText);
 }
 xmlHttp.open("GET", theUrl, false); // true for asynchronous 
+xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
 xmlHttp.send(null);
 } // httpGetAsync
