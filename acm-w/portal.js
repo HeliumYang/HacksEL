@@ -115,7 +115,7 @@ xmlHttp.onreadystatechange = function() {
         callback(xmlHttp.responseText);
 }
 xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
+xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
 xmlHttp.send(null);
 } // httpGetAsync
 
@@ -127,6 +127,6 @@ xmlHttp.onreadystatechange = function() {
         callback(xmlHttp.responseText);
 }
 xmlHttp.open("GET", theUrl, false); // true for asynchronous 
-xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
+xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
 xmlHttp.send(null);
 } // httpGetAsync
