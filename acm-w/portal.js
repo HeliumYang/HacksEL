@@ -28,7 +28,7 @@ function login(response) {
 } // login
 
 function generateAttendance(email, fName, lName) {
-  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>Attendance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugagirls.code@gmail.com'>ugagirls.code@gmail.com</a>.</div></div>" +
+  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>ACM-W Girls.Code() Attendance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugagirls.code@gmail.com'>ugagirls.code@gmail.com</a>.</div></div>" +
 "<div id='elInfo' class = 'infoCard'><b>About UGAHacks Experiential Learning</b> [<a href='javascript:showELInfo();'>show</a>]</div>"
   httpGetAsync("https://script.google.com/macros/s/AKfycbxazCanBlbFc7TlUNvlgJz_HHtkuH-yfXMflDtd_YPjDjUhaILZAthWpF9-Z0uoW-62GA/exec?myid=" + email.split("@")[0], function(data){
   dataParsed = JSON.parse(data);
