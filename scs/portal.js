@@ -28,11 +28,13 @@ function login(response) {
 } // login
 
 function generateAttendance(email, fName, lName) {
-  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>SCS Attendance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugascs@gmail.com'>ugascs@gmail.com</a>.</div></div>" +
+  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>SCS Attendance:</b><br><br><table id='attendanceTable'><div id='loadingicon'><img src='Loading_icon.gif'></div></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugascs@gmail.com'>ugascs@gmail.com</a>.</div></div>" +
 "<div id='elInfo' class = 'infoCard'><b>About UGAHacks Experiential Learning</b> [<a href='javascript:showELInfo();'>show</a>]</div>"
   httpGetAsync("https://script.google.com/macros/s/AKfycbzJLqXDB-p_ln6mUrBf3J4Lg_tXl38pryJYw20TFl8ZOxSraz9UczyJ1aIHREzPDLCq/exec?myid=" + email.split("@")[0], function(data){
   dataParsed = JSON.parse(data);
     console.log(dataParsed);
+    let loadingIcon = document.querySelector("#loadingicon")
+    loadingIcon.innerHTML = "";
     let attendanceTable = document.querySelector("#attendanceTable");
     initAttendanceTable(attendanceTable);
     fillAttendance(attendanceTable, dataParsed);
