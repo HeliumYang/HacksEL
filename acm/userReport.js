@@ -47,7 +47,7 @@ function checkMembershipForm(email) {
 } // checkMembershipForm
 
 function generateAttendance(email, fName, lName) {
-  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>Attandance:</b><br><br><table id='attendanceTable'></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugaacm@uga.edu'>ugaacm@uga.edu</a>.</div></div>" +
+  infoCards.innerHTML = "<div id='attendance' class = 'infoCard'><b>Attandance:</b><br><br><table id='attendanceTable'><div text-allign:center id='loadingicon'>Please wait... If your attendance portal does not refresh within 1 minute, please reach out to <a href='mailto:hacksel@heliumyang.com'>hacksel@heliumyang.com</a><br><img src='Loading_icon.gif'></div></table><br>This updates automatically! If you checked-in to a meeting or filled out a reflection and it does not show up here, please contact <a href='mailto:ugaacm@uga.edu'>ugaacm@uga.edu</a>.</div></div>" +
 "<div id='elInfo' class = 'infoCard'><b>About UGAHacks Experiential Learning</b> [<a href='javascript:showELInfo();'>show</a>]</div>"
   httpGetAsync("https://script.google.com/macros/s/AKfycbyYNnp9nrUGVJJW-jN1wEsmflkd2jtsIR-qjEK-a7-8AjmMYQOSceTLCBWkNL5ihQqnrw/exec?myid=" + email.split("@")[0], function(data){
   dataParsed = JSON.parse(data);
