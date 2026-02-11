@@ -3,7 +3,7 @@ let alertDiv = document.querySelector("#alert");
 let userInfoCard = document.querySelector("#userInfoCard");
 let leftPanel = document.querySelector("#leftPanel");
 let infoCards = document.querySelector("#infoCards");
-let userCardBox = '<div id="profilePicture"><img class="circleCrop" src="default_photo.jpeg" width="100" height="100"></div><br>' + 
+let userCardBox = '<div id="profilePicture"><img class="circleCrop" src="default_photo.png" width="100" height="100"></div><br>' + 
                   '<b>Name:</b> <p id="name">LOADING</p>' + 
                   '<b>UGA Email:</b> <p id="email">LOADING@uga.edu</p>' +
                   '<b>Total Attendance Hours:</b> <p id="totalHours">Loading...</p>' + 
