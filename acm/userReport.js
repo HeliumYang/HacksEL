@@ -8,7 +8,7 @@ let userCardBox = '<div id="profilePicture"><img class="circleCrop" src="default
                   '<b>UGA Email:</b> <p id="email">LOADING@uga.edu</p>' +
                   '<b>Total Attendance Hours:</b> <p id="totalHours">Loading...</p>' + 
                   '<b>Membership Status:</b>* <p id="membershipStatus">Loading...</p>' + 
-'<hr>* Note: Membership status may take up to 1 week to update. If your membership status is not updated after 1 week of payment, please contact us at <a href="mailto:ugaacm@uga.edu">ugaacm@uga.edu</a>. Your membership status shown is for ACM only. ACM-W Girls.Code() is our sister organization and only uses our portal for EL hour tracking.'
+'<hr>* Note: Membership status may take up to 1 week to update. If your membership status is not updated after 1 week of payment, please contact us at <a href="mailto:ugaacm@uga.edu">ugaacm@uga.edu</a>. Your membership status shown is for ACM only. please click <a href="https://hacksel.liumapps.com/">here</a> to check EL status for other UGAHacks partner organizations.'
 let signInButton = document.querySelector(".signInButton");
 
 // fetching the login credential data, validating the uga.edu, and then sending it to database to take care of the rest
