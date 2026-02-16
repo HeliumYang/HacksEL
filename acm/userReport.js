@@ -90,7 +90,7 @@ var payingMember = 0;
 } // generateAttendance
 
 function initAttendanceTable(table) {
-  table.innerHTML += "<tr><th>Attendance ID (AID)</th><th>Date</th><th>Program</th><th>Hours</th><th>Reflection Status</th><th>Notes</th></tr>"
+  table.innerHTML = "<tr><th>Attendance ID (AID)</th><th>Date</th><th>Program</th><th>Hours</th><th>Reflection Status</th><th>Notes</th></tr>"
 } // initAttendanceTable
 
 function fillAttendance(table, attendance) {
